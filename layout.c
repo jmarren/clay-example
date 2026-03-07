@@ -20,7 +20,17 @@ Clay_RenderCommandArray create_layout(void) {
 			.childGap = 16
 		}
 
-			});
+			}) {
+		CLAY(CLAY_ID("InnerContainer"), {
+			.backgroundColor = { 50, 50, 50, 255 },
+			.layout = {
+				.sizing = {
+					.width = 100,
+					.height = 100,
+				},
+			},
+		});
+	};
 
     Clay_RenderCommandArray renderCommands = Clay_EndLayout();
     // for (int32_t i = 0; i < renderCommands.length; i++) {
