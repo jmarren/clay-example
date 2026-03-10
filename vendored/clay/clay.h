@@ -4040,7 +4040,9 @@ void Clay_SetPointerState(Clay_Vector2 position, bool isPointerDown) {
 CLAY_WASM_EXPORT("Clay_Initialize")
 Clay_Context* Clay_Initialize(Clay_Arena arena, Clay_Dimensions layoutDimensions, Clay_ErrorHandler errorHandler) {
     // Cacheline align memory passed in
+    // set baseOffset to 64 minus the total arena memory mod 64
     uintptr_t baseOffset = 64 - ((uintptr_t)arena.memory % 64);
+    // if the baseOffset is 64, set it to 0
     baseOffset = baseOffset == 64 ? 0 : baseOffset;
     arena.memory += baseOffset;
     Clay_Context *context = Clay__Context_Allocate_Arena(&arena);

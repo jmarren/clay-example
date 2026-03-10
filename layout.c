@@ -1,5 +1,5 @@
-// #include "clay.h"
 #include "clay/clay.h"
+#include <stdio.h>
 
 Clay_RenderCommandArray create_layout(void) {
 	Clay_BeginLayout();
@@ -19,9 +19,8 @@ Clay_RenderCommandArray create_layout(void) {
 			.padding = CLAY_PADDING_ALL(16),
 			.childGap = 16
 		}
-
-			}) {
-		CLAY(CLAY_ID("InnerContainer"), {
+		}) {
+		CLAY(CLAY_ID("InnerContainer-1"), {
 			.backgroundColor = { 50, 50, 50, 255 },
 			.layout = {
 				.sizing = {
@@ -30,15 +29,33 @@ Clay_RenderCommandArray create_layout(void) {
 				},
 			},
 		});
+		CLAY(CLAY_ID("InnerContainer-2"), {
+			.backgroundColor = { 50, 50, 50, 255 },
+			.layout = {
+				.sizing = {
+					.width = 100,
+					.height = 100,
+				},
+			},
+		}) {
+
+
+                        CLAY(CLAY_ID("TextContainer"), {
+                                        .layout = {
+                                                .padding = 16,
+                                        }
+                                }){
+                                        CLAY_TEXT(CLAY_STRING("hi"), CLAY_TEXT_CONFIG({
+                                                        .textColor = {  0, 0, 0, 255 },
+							.fontSize = 35,
+                                        }));
+					printf("rendering text\n");
+                        };
+                };
 	};
 
     Clay_RenderCommandArray renderCommands = Clay_EndLayout();
-    // for (int32_t i = 0; i < renderCommands.length; i++) {
-    //     Clay_RenderCommandArray_Get(&renderCommands, i)->boundingBox.y += data->yOffset;
-    // }
     return renderCommands;
-
-
 
 }
 
